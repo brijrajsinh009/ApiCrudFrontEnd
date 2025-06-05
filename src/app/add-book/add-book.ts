@@ -21,7 +21,8 @@ export class AddBook {
     id: new FormControl(0),
     name: new FormControl('', [Validators.required]),
     author: new FormControl('', [Validators.required]),
-    price: new FormControl(null, [Validators.required])
+    price: new FormControl(null, [Validators.required,Validators.min(1),
+      Validators.max(999)])
   });
 
   onSubmit() {

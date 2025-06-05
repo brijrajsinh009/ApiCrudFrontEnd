@@ -23,16 +23,19 @@ export class EditBook implements OnInit {
     private bookService: Book,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.bookId = Number(this.route.snapshot.paramMap.get('id'));
 
     this.bookForm = this.fb.group({
-      id:[this.bookId],
+      id: [this.bookId],
       name: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      price: [0, [Validators.required]]
+      price: [0, [Validators.required,
+      Validators.min(1),
+      Validators.max(999)
+      ]]
     });
 
     this.loadBookData(this.bookId);
@@ -40,7 +43,7 @@ export class EditBook implements OnInit {
 
   loadBookData(id: number): void {
     this.bookService.getBookById(id).subscribe({
-      next: (res:any) => {
+      next: (res: any) => {
         console.log(res);
         if (res.success) {
           this.bookForm.patchValue(res.data);
@@ -49,7 +52,7 @@ export class EditBook implements OnInit {
           this.router.navigate(['/dashboard']);
         }
       },
-      error: (err:any) => {
+      error: (err: any) => {
         alert('Server error: ' + err.message);
         this.router.navigate(['/dashboard']);
       }
@@ -68,7 +71,7 @@ export class EditBook implements OnInit {
     };
 
     this.bookService.updateBook(updatedBook).subscribe({
-      next: (res:any) => {
+      next: (res: any) => {
         if (res.success) {
           alert('Book updated successfully');
           this.router.navigate(['/dashboard']);
@@ -76,7 +79,7 @@ export class EditBook implements OnInit {
           alert('Update failed: ' + res.message);
         }
       },
-      error: (err:any) => alert('Server error: ' + err.message)
+      error: (err: any) => alert('Server error: ' + err.message)
     });
   }
 }
