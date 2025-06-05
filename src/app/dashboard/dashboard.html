@@ -1,0 +1,65 @@
+<style>
+    .book-item {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+        margin-bottom: 12px;
+        background-color: #e1f5fe;
+    }
+
+    .book-info {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .book-name {
+        margin: 0 0 4px 0;
+    }
+
+    .book-details {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .book-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+</style>
+
+<div class="w-100 d-flex justify-content-between">
+    <div class="fs-1">Books</div>
+    <div class="d-flex align-items-center">
+        <div class="btn border border-1 border-white bg-white d-flex align-items-center" mat-icon-button color="warn"
+            aria-label="Add book" (click)="goToAdd()">
+            <mat-icon>add</mat-icon>
+        </div>
+    </div>
+</div>
+<mat-list>
+    <mat-list-item *ngFor="let book of books" class="book-item" style="height: 60px;">
+        <div class="d-flex justify-content-between ">
+            <div class="book-info">
+                <h5 matLine class="book-name">{{ book.name }}</h5>
+                <p matLine class="book-details">Author: {{ book.author }} | Price: {{ book.price }} ₹</p>
+            </div>
+
+            <div class="book-actions">
+
+                <a class="btn" [routerLink]="['/edit', book.id]" mat-icon-button color="primary" aria-label="Edit book">
+                    <mat-icon>edit</mat-icon>
+                </a>
+                <div class="btn" mat-icon-button color="warn" aria-label="Delete book" (click)="onDeleteBook(book.id)">
+                    <mat-icon>delete</mat-icon>
+                </div>
+            </div>
+        </div>
+
+    </mat-list-item>
+</mat-list>

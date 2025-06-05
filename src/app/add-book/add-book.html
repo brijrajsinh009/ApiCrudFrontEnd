@@ -1,0 +1,44 @@
+
+<div class="w-100 d-flex justify-content-center mb-3">
+    <h1>Add Book</h1>
+</div>
+<div>
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="book-form d-flex flex-column" style="width: 500px;">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Book Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter book name" />
+            <mat-error *ngIf="bookForm.get('name')?.hasError('required')">
+                Name is required
+            </mat-error>
+            <mat-error *ngIf="bookForm.get('name')?.hasError('minlength')">
+                Minimum 2 characters required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Author</mat-label>
+            <input matInput formControlName="author" placeholder="Enter author name" />
+            <mat-error *ngIf="bookForm.get('author')?.hasError('required')">
+                Author is required
+            </mat-error>
+            <mat-error *ngIf="bookForm.get('author')?.hasError('minlength')">
+                Minimum 2 characters required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="price" placeholder="Enter price" />
+            <mat-error *ngIf="bookForm.get('price')?.hasError('required')">
+                Price is required
+            </mat-error>
+            <mat-error *ngIf="bookForm.get('price')?.hasError('min')">
+                Price must be at least 0
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="bookForm.invalid">
+            Add Book
+        </button>
+    </form>
+</div>
