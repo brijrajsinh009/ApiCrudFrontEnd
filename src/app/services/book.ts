@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment'
+import { ApiResponse,BookViewModel } from '../models/model';
 
-export interface BookViewModel {
-  id: number;
-  name: string;
-  author: string;
-  price: number;
-}
+// export interface BookViewModel {
+//   id: number;
+//   name: string;
+//   author: string;
+//   price: number;
+// }
 
-export interface ApiResponse<T> {
-  success: boolean;
-  message: string;
-  data: T;
-}
+// export interface ApiResponse<T> {
+//   success: boolean;
+//   message: string;
+//   data: T;
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export interface ApiResponse<T> {
 
 export class Book {
 
-  private apiUrl = 'http://localhost:5029/ApiCrud';
+  private apiUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -42,7 +44,7 @@ export class Book {
   }
 
   getBookById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/Book?id=${id}`); 
+    return this.http.get<any>(`${this.apiUrl}/Book?id=${id}`);
   }
 
   updateBook(newBook: BookViewModel): Observable<ApiResponse<number>> {

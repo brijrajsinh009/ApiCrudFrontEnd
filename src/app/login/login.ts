@@ -5,10 +5,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
-import { AuthService, LoginDetails } from '../services/auth';
-import { CommonModule } from '@angular/common'; 
+import { AuthService } from '../services/auth';
+import { LoginDetails } from '../models/model';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    NgIf ,
+    NgIf,
   ]
 })
 
@@ -30,7 +30,7 @@ export class Login {
     password: new FormControl('', [Validators.required, this.noSpaceValidator])
   });
 
-  constructor(private authService: AuthService,private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   noSpaceValidator(control: AbstractControl): ValidationErrors | null {
     return /\s/.test(control.value) ? { noSpace: true } : null;

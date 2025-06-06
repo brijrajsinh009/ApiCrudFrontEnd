@@ -2,28 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
-export interface ApiResponse<T = any> {
-  success: boolean;
-  message: string;
-  data?: T;
-}
-
-export interface LoginDetails {
-  userEmail: string;
-  password: string;
-}
+import { environment } from '../../environments/environment';
+import { LoginDetails, ApiResponse } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5029/ApiCrud';
+  private apiUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  login(credentials: LoginDetails): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.apiUrl}/Login`, credentials).pipe(
+  login(credentials: LoginDetails): Observable<ApiResponse<any | null>> {
+    return this.http.post<ApiResponse<any | null>>(`${this.apiUrl}/Login`, credentials).pipe(
       map(response => response),
       catchError(this.handleError)
     );

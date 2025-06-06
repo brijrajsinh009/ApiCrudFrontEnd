@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,9 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
-import { Login } from './login/login';
 import { HttpClientModule } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-root',
@@ -25,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatSlideToggleModule,
     HttpClientModule,
-    Login,
+    
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css'] 

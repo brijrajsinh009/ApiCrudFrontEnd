@@ -5,7 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Book, BookViewModel } from '../services/book';
+import { Book } from '../services/book';
+import { BookViewModel } from '../models/model';
 import { Router } from '@angular/router';
 
 
