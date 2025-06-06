@@ -31,7 +31,7 @@ export const AuthLoginInterceptor: HttpInterceptorFn = (
     headers = headers.set('Authorization', jwtToken);
   }
   if (refreshToken) {
-    headers = headers.set('Refresh-Token', refreshToken);
+    headers = headers.set('RefreshToken', refreshToken);
   }
 
   const authReq = req.clone({ headers });
@@ -41,7 +41,7 @@ export const AuthLoginInterceptor: HttpInterceptorFn = (
     tap((event) => {
       if (event instanceof HttpResponse) {
         const newJwtToken = event.headers.get('authorization') || event.headers.get('Authorization');
-        const newRefreshToken = event.headers.get('refresh-token') || event.headers.get('Refresh-Token');
+        const newRefreshToken = event.headers.get('refreshtoken') || event.headers.get('RefreshToken');
         console.log(event.headers.keys());
 
         if (newJwtToken) {
@@ -55,7 +55,7 @@ export const AuthLoginInterceptor: HttpInterceptorFn = (
 
     catchError((error: HttpErrorResponse) => {
       if (error?.status === 401) {
-        router.navigate(['/']);
+        router.navigate(['/login']);
       }
       return throwError(() => error);
     })

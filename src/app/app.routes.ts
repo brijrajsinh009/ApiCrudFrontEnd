@@ -5,7 +5,8 @@ import { AddBook } from './add-book/add-book';
 import { EditBook } from './edit-book/edit-book';
 
 export const routes: Routes = [
-    { path: '', component: Login },
+    { path: '', component: Dashboard },
+    { path: 'login', component: Login },
     { path: 'dashboard', component: Dashboard },
     { path: 'add', component: AddBook },
     { path: 'edit/:id', component: EditBook },
