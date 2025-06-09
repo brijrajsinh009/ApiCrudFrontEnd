@@ -16,12 +16,13 @@ import { Router } from '@angular/router';
   templateUrl: './add-book.html',
   styleUrl: './add-book.css'
 })
+
 export class AddBook {
   constructor(private bookService: Book, private router: Router) { }
   bookForm = new FormGroup({
     id: new FormControl(0),
-    name: new FormControl('', [Validators.required]),
-    author: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(75)]),
+    author: new FormControl('', [Validators.required, Validators.maxLength(75)]),
     price: new FormControl(null, [Validators.required,Validators.min(1),
       Validators.max(999)])
   });

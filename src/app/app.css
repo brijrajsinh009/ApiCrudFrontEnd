@@ -27,4 +27,15 @@
     flex: 1 1 auto; 
     background-color: rgb(132 189 255);
   }
+
+  mat-sidenav-content section {
+    flex: 1;
+    overflow: auto; 
+  }
+
+  mat-sidenav-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
   

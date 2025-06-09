@@ -31,8 +31,8 @@ export class EditBook implements OnInit {
 
     this.bookForm = this.fb.group({
       id: [this.bookId],
-      name: ['', [Validators.required]],
-      author: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.maxLength(75)]],
+      author: ['', [Validators.required, Validators.maxLength(75)]],
       price: [0, [Validators.required,
       Validators.min(1),
       Validators.max(999)
