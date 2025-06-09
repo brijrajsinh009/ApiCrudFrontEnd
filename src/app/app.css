@@ -1,0 +1,30 @@
+
+.no-underline {
+    text-decoration: none;
+    color: black;
+}
+
+.link-with-icon h4::before {
+    content: "• ";
+    color: black;
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+
+.app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; 
+  }
+  
+  mat-toolbar {
+    flex: 0 0 auto; 
+  }
+  
+  .sidenav-container {
+    flex: 1 1 auto; 
+    background-color: rgb(132 189 255);
+  }
+  

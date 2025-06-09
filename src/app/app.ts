@@ -1,33 +1,52 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatNativeDateModule } from '@angular/material/core';
-import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone: true, 
+  standalone: true,
   imports: [
     RouterOutlet,
-    MatButtonModule,
+    MatSidenavModule,
     MatToolbarModule,
-    MatDatepickerModule,
-    MatNativeDateModule, 
-    MatFormFieldModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    HttpClientModule,
-    
+    MatIconModule,
+    MatButtonModule,
+    RouterModule,
+    NgIf
   ],
   templateUrl: './app.html',
-  styleUrls: ['./app.css'] 
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected title = 'ApiCrudFrontEnd';
+  title = 'Book Inventory';
+
+  showHeader = true;
+
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.showHeader = event.url !== '/login';
+    });
+  }
+
+  @ViewChild('drawer') drawer!: MatSidenav;
+
+  logOut() {
+    const confirmed = confirm('Are you sure you want to log out?');
+    if (confirmed) {
+      document.cookie = 'JwtToken' + '=; Max-Age=0; path=/;';
+      document.cookie = 'RefreshToken' + '=; Max-Age=0; path=/;';
+      this.router.navigate(['/login']);
+    }
+  }
+
+
 }
+
 
