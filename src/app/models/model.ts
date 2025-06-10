@@ -14,4 +14,11 @@ export interface BookViewModel {
     name: string;
     author: string;
     price: number;
-  }
+}
+
+export interface UserRegistration {
+    name: string;
+    phoneNumber: string;
+    password: string;
+    confirmPassword: string;
+}

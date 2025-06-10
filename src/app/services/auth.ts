@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { LoginDetails, ApiResponse } from '../models/model';
+import { LoginDetails, ApiResponse, UserRegistration } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,29 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials: LoginDetails): Observable<ApiResponse<any | null>> {
-    return this.http.post<ApiResponse<any | null>>(`${this.apiUrl}/Login`, credentials).pipe(
+    const headers = new HttpHeaders({
+      'skip': 'true'
+    });
+    return this.http.post<ApiResponse<any | null>>(`${this.apiUrl}/Login`, credentials, { headers }).pipe(
       map(response => response),
       catchError(this.handleError)
+    );
+  }
+
+  registration(userDetails: UserRegistration): Observable<ApiResponse<any | null>> {
+    const headers = new HttpHeaders({
+      'skip': 'true'
+    });
+    return this.http.post<ApiResponse<any | null>>(`${this.apiUrl}/Register`, userDetails, { headers }).pipe(
+      map(response => response)
+    );
+  }
+
+  getToken(refreshToken: string) {
+    return this.http.post<ApiResponse<any | null>>(
+      `${this.apiUrl}/Tokens`,
+      JSON.stringify(refreshToken),
+      { headers: { 'Content-Type': 'application/json', 'skip': 'true' } }
     );
   }
 
@@ -25,7 +45,7 @@ export class AuthService {
     if (error.error instanceof ErrorEvent) {
       message = `Client error: ${error.error.message}`;
     } else {
-      message = `Server error (${error.status}): ${error.error?.message || error.message}`;
+      message = `Server error : ${error.error?.message || error.message}`;
     }
     return throwError(() => new Error(message));
   }

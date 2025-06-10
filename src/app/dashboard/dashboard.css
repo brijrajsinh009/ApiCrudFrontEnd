@@ -30,3 +30,11 @@
     gap: 8px;
     align-items: center;
 }
+
+::-webkit-scrollbar {
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    color: rgb(0, 247, 255);
+}

@@ -8,9 +8,9 @@
     </div>
 </div>
 <mat-list>
-    <mat-list-item *ngFor="let book of books" class="book-item" style="height: 60px;">
-        <div class="d-flex justify-content-between ">
-            <div class="book-info">
+    <mat-list-item *ngFor="let book of books" class="book-item" style="height: 65px;">
+        <div class="d-flex justify-content-between overflow-auto">
+            <div class="book-info" style="min-width: 300px;">
                 <h5 matLine class="book-name">{{ book.name }}</h5>
                 <p matLine class="book-details">Author: {{ book.author }} | Price: {{ book.price }} ₹</p>
             </div>

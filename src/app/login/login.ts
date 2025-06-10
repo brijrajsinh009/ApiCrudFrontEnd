@@ -8,7 +8,8 @@ import { NgIf } from '@angular/common';
 import { AuthService } from '../services/auth';
 import { LoginDetails } from '../models/model';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -21,10 +22,13 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     NgIf,
+    RouterModule,
+    MatIcon
   ]
 })
 
 export class Login {
+  hide = true;
   loginForm = new FormGroup({
     userEmail: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, this.noSpaceValidator])

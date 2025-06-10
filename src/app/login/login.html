@@ -1,30 +1,36 @@
+<div class="w-100 d-flex justify-content-center">
+  <h2>Book Inventory</h2>
+</div>
+<div class="border p-4 rounded-4 m-3 shadow" style="background-color: rgb(145, 215, 255); max-width: 600px;">
+  <p class="fs-4 mb-4">Welcome,</p>
 
-<div class="border p-4 rounded-4 m-3 shadow" style="background-color: rgb(145, 215, 255); width: 600px;">
-    <p class="fs-4 fw-semibold mb-4">Welcome,</p>
-  
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill" class="w-100 mb-3">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="example@example.com" formControlName="userEmail" required>
-        <mat-error *ngIf="loginForm.get('userEmail')?.invalid && loginForm.get('userEmail')?.touched">
-          Please enter a valid email address
-        </mat-error>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill" class="w-100 mb-3">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Enter password" formControlName="password" required>
-        <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
-          Password is required
-        </mat-error>
-        <mat-error *ngIf="loginForm.get('password')?.hasError('noSpace') && loginForm.get('password')?.touched">
-          Password cannot contain spaces
-        </mat-error>
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" class="w-100" type="submit" [disabled]="loginForm.invalid">
-        Login
-      </button>
-    </form>
-  </div>
-  
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="w-100 mb-3">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="example@example.com" formControlName="userEmail" required>
+      <mat-error *ngIf="loginForm.get('userEmail')?.invalid && loginForm.get('userEmail')?.touched">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100 mb-3">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter password" formControlName="password" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('noSpace') && loginForm.get('password')?.touched">
+        Password cannot contain spaces
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="w-100" type="submit" [disabled]="loginForm.invalid">
+      Login
+    </button>
+    <div class="d-flex justify-content-center mt-2">
+      <a class="" routerLink="/register">
+        Register
+      </a>
+    </div>
+  </form>
+</div>
