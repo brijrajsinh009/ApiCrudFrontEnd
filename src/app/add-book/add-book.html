@@ -37,6 +37,20 @@
                 Price must be between 1 and 999.
             </mat-error>
         </mat-form-field>
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Upload File</mat-label>
+            <input matInput [value]="fileName" readonly>
+            <button mat-icon-button matSuffix (click)="fileInput.click()" type="button">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+            <input type="file" #fileInput hidden (change)="onFileSelected($event)">
+        </mat-form-field>
+        <div *ngIf="imagePreview" class="rounded-2 mb-3" style="background-color: #e0e2ec;">
+            <p class="fs-5">Image Preview:</p>
+            <div class="d-flex justify-content-center">
+                <img [src]="imagePreview" alt="Selected image" style="max-width: auto; height: 150px;" />
+            </div>
+        </div>
         <button mat-raised-button color="primary" type="submit" [disabled]="bookForm.invalid">
             Add Book
         </button>

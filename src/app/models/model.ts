@@ -14,6 +14,7 @@ export interface BookViewModel {
     name: string;
     author: string;
     price: number;
+    image: string;
 }
 
 export interface UserRegistration {
@@ -21,4 +22,5 @@ export interface UserRegistration {
     phoneNumber: string;
     password: string;
     confirmPassword: string;
+    image?: File;
 }

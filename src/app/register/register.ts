@@ -19,7 +19,8 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatButtonModule,
     NgIf,
     RouterModule,
-    MatIcon
+    MatIcon,
+    MatFormFieldModule
   ],
   templateUrl: './register.html',
   styleUrl: './register.css'
@@ -36,7 +37,8 @@ export class Register {
     name: new FormControl('', [Validators.required, Validators.maxLength(75)]),
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$')]),
     password: new FormControl('', [Validators.required, this.noSpaceValidator]),
-    confirmPassword: new FormControl('', [Validators.required, this.noSpaceValidator])
+    confirmPassword: new FormControl('', [Validators.required, this.noSpaceValidator]),
+    image: new FormControl(File)
   }, { validators: this.confirmPasswordValidator() });
 
   noSpaceValidator(control: AbstractControl): ValidationErrors | null {
@@ -67,9 +69,20 @@ export class Register {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const userDetails: UserRegistration = this.registerForm.value as UserRegistration;
-      console.log(userDetails);
-      this.authService.registration(userDetails).subscribe({
+      const formData = new FormData();
+      const controls = ['userEmail', 'name', 'phoneNumber', 'password', 'confirmPassword'];
+      controls.forEach(controlName => {
+        const value = this.registerForm.get(controlName)?.value;
+        formData.append(controlName, value ?? '');
+      });
+      if (this.image) {
+        formData.append('image', this.image);
+      }
+      formData.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      this.authService.registration(formData).subscribe({
         next: (res) => {
           if (res.success) {
             alert('Registration Done. Id : ' + res.data);
@@ -92,4 +105,23 @@ export class Register {
       });
     }
   }
+
+  fileName: string = '';
+  imagePreview: string | ArrayBuffer | null = null;
+  image: File | undefined = undefined;
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.image = file;
+      this.fileName = file.name;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+
 }

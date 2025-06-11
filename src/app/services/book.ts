@@ -5,19 +5,6 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment'
 import { ApiResponse,BookViewModel } from '../models/model';
 
-// export interface BookViewModel {
-//   id: number;
-//   name: string;
-//   author: string;
-//   price: number;
-// }
-
-// export interface ApiResponse<T> {
-//   success: boolean;
-//   message: string;
-//   data: T;
-// }
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +26,7 @@ export class Book {
     return this.http.delete<ApiResponse<null>>(`${this.apiUrl}/DeleteBook?id=${id}`);
   }
 
-  addBook(newBook: BookViewModel): Observable<ApiResponse<number>> {
+  addBook(newBook: FormData): Observable<ApiResponse<number>> {
     return this.http.post<ApiResponse<number>>(`${this.apiUrl}/AddBook`, newBook);
   }
 

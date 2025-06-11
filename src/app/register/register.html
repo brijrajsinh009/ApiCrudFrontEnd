@@ -5,7 +5,7 @@
     <div class="border p-4 rounded-4 m-3 shadow" style="background-color: rgb(145, 215, 255); max-width: 600px;">
         <p class="fs-3 fw-medium mb-4 d-flex justify-content-center"><u>Register</u></p>
         <p class="fs-5 mb-2">Welcome,</p>
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
             <mat-form-field appearance="fill" class="w-100 mb-3">
                 <mat-label>Name</mat-label>
                 <input matInput type="text" placeholder="Enter Name" formControlName="name" required>
@@ -60,6 +60,20 @@
                     Confirm Password must same as Password.
                 </mat-error>
             </mat-form-field>
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Upload File</mat-label>
+                <input matInput [value]="fileName" readonly>
+                <button mat-icon-button matSuffix (click)="fileInput.click()" type="button">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+                <input type="file" #fileInput hidden (change)="onFileSelected($event)">
+            </mat-form-field>
+            <div *ngIf="imagePreview">
+                <p class="fs-5">Image Preview:</p>
+                <div class="d-flex justify-content-center">
+                    <img [src]="imagePreview" alt="Selected image" style="max-width: auto; height: 150px;" />
+                </div>
+            </div>
             <button mat-raised-button color="primary" class="w-100" type="submit" [disabled]="registerForm.invalid">
                 Register
             </button>

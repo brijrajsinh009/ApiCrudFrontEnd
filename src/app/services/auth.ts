@@ -23,7 +23,7 @@ export class AuthService {
     );
   }
 
-  registration(userDetails: UserRegistration): Observable<ApiResponse<any | null>> {
+  registration(userDetails: FormData): Observable<ApiResponse<any | null>> {
     const headers = new HttpHeaders({
       'skip': 'true'
     });

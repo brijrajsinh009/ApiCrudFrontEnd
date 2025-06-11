@@ -8,14 +8,17 @@ import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, MatListModule, MatIconModule, RouterModule],
+  imports: [CommonModule, MatListModule, MatIconModule, RouterModule,],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
 export class Dashboard implements OnInit {
+
+  apiUrl = environment.apiBaseServerUrl;
 
   books: BookViewModel[] = [];
   errorMessage: string | null = null;
