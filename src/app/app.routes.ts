@@ -5,6 +5,8 @@ import { AddBook } from './add-book/add-book';
 import { EditBook } from './edit-book/edit-book';
 import { NotFound404 } from './not-found-404/not-found-404';
 import { Register } from './register/register';
+import { PracticeState } from './practice-state/practice-state';
+import { Practice } from './practice/practice';
 
 export const routes: Routes = [
     { path: '', component: Dashboard },
@@ -13,5 +15,6 @@ export const routes: Routes = [
     { path: 'add', component: AddBook },
     { path: 'edit/:id', component: EditBook },
     { path: 'register', component: Register },
+    { path: 'practice', component:  Practice},
     { path: '**', component: NotFound404 },
   ];

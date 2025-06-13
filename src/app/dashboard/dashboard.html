@@ -10,19 +10,22 @@
 <mat-list>
     <mat-list-item *ngFor="let book of books" class="book-item" style="height: 65px;">
         <div class="d-flex justify-content-between overflow-auto">
-            <div>
-                @if(book.image!=null)
-                {
-                <img [src]="apiUrl+ book.image" alt="Book Image" height="50" width="50">
-                }
-                @else
-                {
-                <mat-icon style="font-size: 50px; height: 50px; width: 50px;">book</mat-icon>
-                }
-            </div>
-            <div class="book-info" style="min-width: 300px;">
-                <h5 matLine class="book-name">{{ book.name }}</h5>
-                <p matLine class="book-details">Author: {{ book.author }} | Price: {{ book.price }} ₹</p>
+            <div class="d-flex">
+                <div class="me-3">
+                    @if(book.image!=null)
+                    {
+                    <img [src]="apiUrl+ book.image" alt="Book Image" height="50" width="50">
+                    }
+                    @else
+                    {
+                    <mat-icon style="font-size: 50px; height: 50px; width: 50px;">book</mat-icon>
+                    }
+                </div>
+                <div class="book-info" style="min-width: 300px;">
+                    <h5 matLine class="book-name">{{ book.name  }}</h5>
+                    <p matLine class="book-details">Author: {{ book.author }} | Price: {{ book.price |
+                        currency:'INR':'symbol':'.2-2' }} </p>
+                </div>
             </div>
             <div class="book-actions">
                 <a class="btn" [routerLink]="['/edit', book.id]" mat-icon-button color="primary" aria-label="Edit book">
