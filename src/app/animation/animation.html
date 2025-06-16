@@ -1,0 +1,15 @@
+<!-- <p>animation works!</p>
+<button (click)="toggle()">Toggle Sidebar</button>
+    <div class="sidebar" [@slideAnimation]="isOpen ? 'open' : 'closed'">Sidebar Content</div> -->
+
+<button (click)="addItem()">Add Item</button>
+<ul [@listAnimation]="items.length">
+    <li *ngFor="let item of items; trackBy: trackByFn">{{ item }}</li>
+</ul>
+
+<mat-grid-list [cols]="cols" rowHeight="100px">
+    <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows"
+        [style.background]="tile.color">
+        {{tile.text}}
+    </mat-grid-tile>
+</mat-grid-list>

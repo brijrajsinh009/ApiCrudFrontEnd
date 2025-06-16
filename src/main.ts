@@ -5,13 +5,15 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { AuthLoginInterceptor } from './app/auth-login-interceptor';
 import { provideStore } from '@ngrx/store';
-import { counterReducer } from './app/counter.reducer';  // Import your reducer
+import { counterReducer } from './app/counter.reducer';  
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 bootstrapApplication(App, {
   providers: [
     provideHttpClient(withInterceptors([AuthLoginInterceptor])),
     provideRouter(routes),
     provideStore({ counter: counterReducer }),
+    provideAnimations(),
   ]
 });
 

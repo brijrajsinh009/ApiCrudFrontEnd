@@ -12,10 +12,11 @@ import { environment } from '../../environments/environment';
 import { delay, Observable, of, Subject } from 'rxjs';
 import { CustomHighlight } from '../custom-highlight';
 import { CustomPipePipe } from '../custom-pipe-pipe';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, MatListModule, MatIconModule, RouterModule, CustomHighlight,CustomPipePipe],
+  imports: [CommonModule, MatListModule, MatIconModule, RouterModule, CustomHighlight, CustomPipePipe, MatPaginator],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -29,6 +30,7 @@ export class Dashboard implements OnInit {
   apiUrl = environment.apiBaseServerUrl;
 
   books: BookViewModel[] = [];
+  booksAll: BookViewModel[] = [];
   errorMessage: string | null = null;
 
   constructor(private bookService: Book, private router: Router, private dialog: MatDialog) {
@@ -50,9 +52,16 @@ export class Dashboard implements OnInit {
 
   ngOnInit() {
     this.bookService.getAllBooks().subscribe({
-      next: (data) => this.books = data,
+      next: (data) => {
+        this.booksAll = data;
+        this.totalElements = this.booksAll.length;
+        this.pageSize = 3;
+        this.pageIndex = 0;
+        this.books = this.booksAll.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
+      },
       error: (err) => this.errorMessage = 'Error loading books'
     });
+
     //for observable practice
     // setTimeout(() => {
     //   this.obj.subscribe({
@@ -125,6 +134,18 @@ export class Dashboard implements OnInit {
   //     complete: () => console.log('Completed')  // Logs when the observable completes
   //   });
   // }
+  totalElements: number = 100;
+  pageSize: number = 3;
+  pageIndex: number = 1;
+
+  onPaginateChange(event: PageEvent) {
+    this.pageIndex = event.pageIndex;  // Update the current page index
+    this.pageSize = event.pageSize;    // Update the current page size
+
+    // Fetch data for the new page
+    console.log(this.pageIndex, this.pageSize);
+    this.books = this.booksAll.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
+  }
 
 
 }

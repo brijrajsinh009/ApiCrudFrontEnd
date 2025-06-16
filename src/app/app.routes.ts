@@ -7,6 +7,7 @@ import { NotFound404 } from './not-found-404/not-found-404';
 import { Register } from './register/register';
 import { PracticeState } from './practice-state/practice-state';
 import { Practice } from './practice/practice';
+import { Animation } from './animation/animation';
 
 export const routes: Routes = [
     { path: '', component: Dashboard },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'edit/:id', component: EditBook },
     { path: 'register', component: Register },
     { path: 'practice', component:  Practice},
+    { path: 'animations', component:  Animation},
     { path: '**', component: NotFound404 },
   ];

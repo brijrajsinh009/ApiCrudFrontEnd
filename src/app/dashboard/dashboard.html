@@ -38,3 +38,6 @@
         </div>
     </mat-list-item>
 </mat-list>
+
+<mat-paginator [length]="totalElements" [pageSize]="pageSize" [pageSizeOptions]="[1, 2, 3]" (page)="onPaginateChange($event)" style="background-color: #e1f5fe;" class="rounded-2">
+</mat-paginator>
