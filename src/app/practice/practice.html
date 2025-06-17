@@ -1,4 +1,9 @@
 <div class="d-flex justify-content-between">
-<app-practice-state></app-practice-state>
+<app-practice-state [messageError]="'Hello! from parent.'" (notifyParent)="handleNotification($event)" #childInstance></app-practice-state>
 <app-practice-state2></app-practice-state2>
 </div>
+<div>
+    This div inside parent component. Message from child :
+    <div>{{messageFromChild}}</div>
+</div>
+<button matButton="filled" (click)="manipulateChild()" >Click to manipulate child</button>

@@ -1,23 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { increment, decrement, reset } from '../counter.actions';
 import { selectCounter } from '../counter.selectors';
 import { AppState } from '../counter.selectors';
 import { CommonModule } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-practice-state',
-  standalone: true, 
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, MatButton],
   templateUrl: './practice-state.html',
   styleUrls: ['./practice-state.css']
 })
 export class PracticeState {
+  @Input() messageError!: string;
+  @Output() notifyParent: EventEmitter<string> = new EventEmitter();
   counter$: Observable<number>;
 
+  @ViewChild('btnPress') btnRef!: ElementRef;
+
+  changeButtonText(newText: string) {
+    this.btnRef.nativeElement.innerText = newText;
+  }
+
   constructor(private store: Store<AppState>) {
-    this.counter$ = this.store.select("counter"); 
+    this.counter$ = this.store.select("counter");
   }
 
   increment() {
@@ -30,6 +39,10 @@ export class PracticeState {
 
   reset() {
     this.store.dispatch(reset());
+  }
+
+  sendData() {
+    this.notifyParent.emit('Hello Parent!');
   }
 }
 

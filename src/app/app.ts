@@ -8,6 +8,7 @@ import { filter } from 'rxjs/operators';
 import { NgIf } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialog } from './confirm-dialog/confirm-dialog';
+import { routeAnimations } from './animations/route-animations';
 
 @Component({
   selector: 'app-root',
@@ -22,9 +23,11 @@ import { ConfirmDialog } from './confirm-dialog/confirm-dialog';
     NgIf
   ],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrls: ['./app.css'],
+  animations: [routeAnimations],
 })
 export class App {
+
   title = 'Book Inventory';
 
   showHeader = true;
@@ -39,8 +42,11 @@ export class App {
 
   @ViewChild('drawer') drawer!: MatSidenav;
 
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+  
   logOut() {
-    // const confirmed = confirm('Are you sure you want to log out?');
     const dialogRef = this.dialog.open(ConfirmDialog, {
       width: '250px',
       data: { message: 'Are you sure you want to log out?', btn: 'log out' }
@@ -52,15 +58,9 @@ export class App {
         this.router.navigate(['/login']);
       }
     });
-
-    // if (confirmed) {
-    //   document.cookie = 'JwtToken' + '=; Max-Age=0; path=/;';
-    //   document.cookie = 'RefreshToken' + '=; Max-Age=0; path=/;';
-    //   this.router.navigate(['/login']);
-    // }
   }
-
-
 }
+
+
 
 

@@ -4,3 +4,8 @@
     <button (click)="decrement()">Decrement</button>
     <button (click)="reset()">Reset</button>
 </div>
+<div>
+    Message from parent: <div>{{messageError}}</div>
+</div>
+<div #btnPress></div>
+<button matButton="filled" (click)="sendData()" >Send message to parent</button>

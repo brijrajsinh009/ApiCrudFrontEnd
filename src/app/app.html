@@ -15,14 +15,19 @@
     </div>
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer mode="side" style="width: 180px; background-color: rgb(162, 206, 255);" class="border border-2">
+    <mat-sidenav #drawer mode="side" style="width: 180px; background-color: rgb(162, 206, 255);"
+      class="border border-2">
       <a routerLink="/" class="no-underline d-flex align-items-center m-3" style="color: black;">
         <mat-icon style="margin-right: 6px;">home</mat-icon>
         <h4 style="margin: 0;">Home</h4>
       </a>
     </mat-sidenav>
     <mat-sidenav-content>
-      <section class="m-3"><router-outlet></router-outlet></section>
+      <section class="m-3">
+        <div [@routeAnimations]="prepareRoute(outlet)" style="position: relative;">
+          <router-outlet #outlet="outlet"></router-outlet>
+        </div>
+      </section>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
@@ -31,6 +36,8 @@
 {
 <div style="min-height: 100vh; width: 100vw; background-color: rgb(132 189 255);"
   class="d-flex justify-content-center align-items-center">
-  <router-outlet></router-outlet>
+  <div [@routeAnimations]="prepareRoute(outlet)" style="position: relative;">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
 </div>
 }

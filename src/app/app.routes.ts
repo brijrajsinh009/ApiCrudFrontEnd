@@ -10,13 +10,13 @@ import { Practice } from './practice/practice';
 import { Animation } from './animation/animation';
 
 export const routes: Routes = [
-    { path: '', component: Dashboard },
-    { path: 'login', component: Login },
-    { path: 'dashboard', component: Dashboard },
-    { path: 'add', component: AddBook },
-    { path: 'edit/:id', component: EditBook },
-    { path: 'register', component: Register },
-    { path: 'practice', component:  Practice},
-    { path: 'animations', component:  Animation},
-    { path: '**', component: NotFound404 },
-  ];
+  { path: '', component: Dashboard, data: { animation: 'Home' } },
+  { path: 'login', component: Login },
+  { path: 'dashboard', component: Dashboard, data: { animation: 'Home' } },
+  { path: 'add', component: AddBook,data: { animation: 'About' } },
+  { path: 'edit/:id', component: EditBook,data: { animation: 'About' } },
+  { path: 'register', component: Register },
+  { path: 'practice', component: Practice,data: { animation: 'Contact' } },
+  { path: 'animations', component: Animation },
+  { path: '**', component: NotFound404 },
+];
