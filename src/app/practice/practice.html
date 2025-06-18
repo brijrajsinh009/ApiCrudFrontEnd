@@ -7,3 +7,25 @@
     <div>{{messageFromChild}}</div>
 </div>
 <button matButton="filled" (click)="manipulateChild()" >Click to manipulate child</button>
+
+<h1>
+    reusable formfield
+</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <app-form-field
+      label="Username"
+      formControlName="username"
+      [required]="true"
+      [validators]="[minLengthValidator]"
+      placeholder="Enter your username"
+    ></app-form-field>
+    <app-form-field
+      label="Email"
+      type="email"
+      formControlName="email"
+      [required]="true"
+      [validators]="[emailValidator]"
+      placeholder="Enter your email"
+    ></app-form-field>
+    <button type="submit" [disabled]="form.invalid">Submit</button>
+  </form>

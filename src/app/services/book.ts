@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment'
 import { ApiResponse,BookViewModel } from '../models/model';
@@ -10,6 +10,14 @@ import { ApiResponse,BookViewModel } from '../models/model';
 })
 
 export class Book {
+
+  private messageSubject = new Subject<any>();
+
+  public message$ = this.messageSubject.asObservable();
+
+  sendMessage(message: any): void {
+    this.messageSubject.next(message);
+  }
 
   private apiUrl = environment.apiBaseUrl;
 
