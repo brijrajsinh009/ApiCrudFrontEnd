@@ -1,31 +1,35 @@
 <div class="d-flex justify-content-between">
-<app-practice-state [messageError]="'Hello! from parent.'" (notifyParent)="handleNotification($event)" #childInstance></app-practice-state>
-<app-practice-state2></app-practice-state2>
+  <app-practice-state [messageError]="'Hello! from parent.'" (notifyParent)="handleNotification($event)"
+    #childInstance></app-practice-state>
+  <app-practice-state2></app-practice-state2>
 </div>
 <div>
-    This div inside parent component. Message from child :
-    <div>{{messageFromChild}}</div>
+  This div inside parent component. Message from child :
+  <div>{{messageFromChild}}</div>
 </div>
-<button matButton="filled" (click)="manipulateChild()" >Click to manipulate child</button>
+<button matButton="filled" (click)="manipulateChild()">Click to manipulate child</button>
 
 <h1>
-    reusable formfield
+  reusable formfield
 </h1>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <app-form-field
-      label="Username"
-      formControlName="username"
-      [required]="true"
-      [validators]="[minLengthValidator]"
-      placeholder="Enter your username"
-    ></app-form-field>
-    <app-form-field
-      label="Email"
-      type="email"
-      formControlName="email"
-      [required]="true"
-      [validators]="[emailValidator]"
-      placeholder="Enter your email"
-    ></app-form-field>
-    <button type="submit" [disabled]="form.invalid">Submit</button>
-  </form>
+  <app-form-field label="Username" formControlName="username" [required]="true" [validators]="[minLengthValidator]"
+    placeholder="Enter your username"></app-form-field>
+  <app-form-field label="Email" type="email" formControlName="email" [required]="true" [validators]="[emailValidator]"
+    placeholder="Enter your email"></app-form-field>
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
+<a matButton="filled" routerLink="/practice/child">Click to manipulate child</a>
+<router-outlet #outlet="outlet"></router-outlet>
+
+<div>{{ai}}</div>
+<div>
+<script src="https://js.puter.com/v2/"></script>
+<script>
+    puter.ai.chat("What are the benefits of exercise?")
+        .then(response => {
+            puter.print(response);
+            cosole.log("hi");
+        });
+</script>
+</div>
